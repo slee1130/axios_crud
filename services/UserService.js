@@ -9,7 +9,7 @@ class UserService extends Service {
   }
 
   getUsers() {
-    return this.get("/asdf");
+    return this.get("/users");
   }
 }
 

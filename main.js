@@ -51,8 +51,8 @@ usersList.addEventListener("click", (e) => {
     axios
       .delete(`http://localhost:3001/users/${id}`)
       .then((res) => renderUsers(res))
-      .catch((err) => console.log(error));
-    // window.location.reload();
+      .catch((err) => console.log(err));
+    window.location.reload();
     // e.stopPropagation();
   }
 });
@@ -84,12 +84,13 @@ usersList.addEventListener("click", (e) => {
         email: email.value,
       })
       .then((res) => renderUsers(res));
-    // window.location.reload();
+    window.location.reload();
   });
 });
 
 //POST
 addUserForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
   try {
     const result = await axios.post("http://localhost:3001/users", {
       last_name: lastName.value,
@@ -105,7 +106,6 @@ addUserForm.addEventListener("submit", async (e) => {
     firstName.value = "";
     email.value = "";
     window.location.reload();
-    return false;
   } catch (err) {
     console.log(err);
   }

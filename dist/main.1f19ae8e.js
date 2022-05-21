@@ -4676,7 +4676,7 @@ var UserService = /*#__PURE__*/function (_Service) {
   }, {
     key: "getUsers",
     value: function getUsers() {
-      return this.get("/asdf");
+      return this.get("/users");
     }
   }]);
 
@@ -4766,10 +4766,10 @@ usersList.addEventListener("click", function (e) {
     _axios.default.delete("http://localhost:3001/users/".concat(id)).then(function (res) {
       return renderUsers(res);
     }).catch(function (err) {
-      return console.log(error);
-    }); // window.location.reload();
-    // e.stopPropagation();
+      return console.log(err);
+    });
 
+    window.location.reload(); // e.stopPropagation();
   }
 }); //edit
 
@@ -4797,8 +4797,9 @@ usersList.addEventListener("click", function (e) {
       email: email.value
     }).then(function (res) {
       return renderUsers(res);
-    }); // window.location.reload();
+    });
 
+    window.location.reload();
   });
 }); //POST
 
@@ -4809,31 +4810,33 @@ addUserForm.addEventListener("submit", /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.prev = 0;
-            _context.next = 3;
+            e.preventDefault();
+            _context.prev = 1;
+            _context.next = 4;
             return _axios.default.post("http://localhost:3001/users", {
               last_name: lastName.value,
               first_name: firstName.value,
               email: email.value
             });
 
-          case 3:
+          case 4:
             result = _context.sent;
             dataArr = [];
             dataArr.push(result);
-            _context.next = 8;
+            _context.next = 9;
             return fetchUsers();
 
-          case 8:
+          case 9:
             lastName.value = "";
             firstName.value = "";
             email.value = "";
             window.location.reload();
-            return _context.abrupt("return", false);
+            _context.next = 18;
+            break;
 
           case 15:
             _context.prev = 15;
-            _context.t0 = _context["catch"](0);
+            _context.t0 = _context["catch"](1);
             console.log(_context.t0);
 
           case 18:
@@ -4841,7 +4844,7 @@ addUserForm.addEventListener("submit", /*#__PURE__*/function () {
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 15]]);
+    }, _callee, null, [[1, 15]]);
   }));
 
   return function (_x) {
@@ -4876,7 +4879,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56592" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55317" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
