@@ -1,0 +1,1 @@
+{"version":3,"sources":["css/main.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"main.c52e0fe2.css","sourceRoot":"..","sourcesContent":["\n.image{\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 20px;\n  width: 80%;\n  height: 80%;\n}"]}
