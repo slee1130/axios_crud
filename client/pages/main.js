@@ -16,6 +16,9 @@ function renderImages(images) {
       return `
       <div class="fetchImagesWrapper">
         <img src=${image.urls.regular} class="image" />
+        <div class="h_container">
+            <i id="heart" class="fa fa-heart"></i>
+      </div>
       </div>
     `;
     })

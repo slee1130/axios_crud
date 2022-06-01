@@ -4742,7 +4742,7 @@ function _fetchImages() {
 function renderImages(images) {
   var imageList = document.querySelector(".fetchImagesWrapper");
   var output = images.map(function (image) {
-    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" />\n      </div>\n    ");
+    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" />\n        <div class=\"h_container\">\n            <i id=\"heart\" class=\"fa fa-heart\"></i>\n      </div>\n      </div>\n    ");
   }).join("");
   return imageList.innerHTML = output;
 }
@@ -4837,7 +4837,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50237" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56666" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
