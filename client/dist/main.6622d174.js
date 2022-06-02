@@ -4701,114 +4701,90 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var imageList = document.querySelector(".fetchImagesWrapper");
+
 function fetchImages() {
   return _fetchImages.apply(this, arguments);
 }
 
 function _fetchImages() {
-  _fetchImages = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  _fetchImages = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var _yield$ImageService$g, results;
 
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
-            _context.prev = 0;
-            _context.next = 3;
+            _context2.prev = 0;
+            _context2.next = 3;
             return _ImageService.default.getSearchImages("london");
 
           case 3:
-            _yield$ImageService$g = _context.sent;
+            _yield$ImageService$g = _context2.sent;
             results = _yield$ImageService$g.results;
             renderImages(results);
-            _context.next = 11;
+            _context2.next = 11;
             break;
 
           case 8:
-            _context.prev = 8;
-            _context.t0 = _context["catch"](0);
-            console.log(_context.t0);
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](0);
+            console.log(_context2.t0);
 
           case 11:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee2, null, [[0, 8]]);
   }));
   return _fetchImages.apply(this, arguments);
 }
 
 function renderImages(images) {
-  var imageList = document.querySelector(".fetchImagesWrapper");
   var output = images.map(function (image) {
-    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" />\n        <div class=\"h_container\">\n            <i id=\"heart\" class=\"fa fa-heart\"></i>\n      </div>\n      </div>\n    ");
+    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" />\n          <div class=\"h_container\">\n            <i id=\"heart-btn\" class=\"far fa-heart\" data-icon=\"heart-icon\"></i>\n          </div>\n      </div>\n    ");
   }).join("");
   return imageList.innerHTML = output;
 }
 
-fetchImages(); // //delete
-// usersList.addEventListener("click", (e) => {
-//   // e.preventDefault();
-//   let delBtn = e.target.id === "delete-user";
-//   let id = e.target.parentElement.dataset.id;
-//   //delete
-//   if (delBtn) {
-//     axios
-//       .delete(`http://localhost:3001/users/${id}`)
-//       .then((res) => renderUsers(res))
-//       .catch((err) => console.log(err));
-//     window.location.reload();
-//     // e.stopPropagation();
-//   }
-// });
-// //edit
-// usersList.addEventListener("click", (e) => {
-//   let editBtn = e.target.id === "edit-user";
-//   let id = e.target.parentElement.dataset.id;
-//   if (editBtn) {
-//     const parent = e.target.parentElement;
-//     let lastNameContent = parent.querySelector(".last-name-value").textContent;
-//     let firstNameContent =
-//       parent.querySelector(".first-name-value").textContent;
-//     let emailContent = parent.querySelector(".email-value").textContent;
-//     lastName.value = lastNameContent;
-//     firstName.value = firstNameContent;
-//     email.value = emailContent;
-//   }
-//   //update
-//   btnSubmit.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     axios
-//       .patch(`http://localhost:3001/users/${id}`, {
-//         last_name: lastName.value,
-//         first_name: firstName.value,
-//         email: email.value,
-//       })
-//       .then((res) => renderUsers(res));
-//     window.location.reload();
-//   });
-// });
-// //POST
-// addUserForm.addEventListener("submit", async (e) => {
-//   e.preventDefault();
-//   try {
-//     const result = await axios.post("http://localhost:3001/users", {
-//       last_name: lastName.value,
-//       first_name: firstName.value,
-//       email: email.value,
-//     });
-//     const dataArr = [];
-//     dataArr.push(result);
-//     await fetchUsers();
-//     lastName.value = "";
-//     firstName.value = "";
-//     email.value = "";
-//     window.location.reload();
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+fetchImages();
+
+function heartIcon() {
+  var heartBtn = document.querySelector(".fa-heart");
+  console.log(heartBtn);
+
+  if (heartBtn.classList.contains("far")) {
+    heartBtn.classList.remove("far");
+    heartBtn.classList.add("fas");
+  } else {
+    heartBtn.classList.remove("fas");
+    heartBtn.classList.add("far");
+  }
+}
+
+imageList.addEventListener("click", /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            heartIcon();
+            e.preventDefault();
+            console.log("you clicked hearticon");
+
+          case 3:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function (_x) {
+    return _ref.apply(this, arguments);
+  };
+}());
 },{"../services/ImageService.js":"services/ImageService.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4837,7 +4813,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56666" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51216" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

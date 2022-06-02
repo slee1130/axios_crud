@@ -1,0 +1,1 @@
+{"id":"${image.urls.regular}","dependencies":[{"name":"/Users/alicelee/json-server-lib/client/package.json","includedInParent":true,"mtime":1653790675150}],"generated":{"js":"module.exports = {};"},"sourceMaps":null,"error":null,"hash":"ffef43cda2542db1d334d883a2e96dc5","cacheData":{"env":{}}}
