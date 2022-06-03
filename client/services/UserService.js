@@ -13,7 +13,6 @@ class UserService extends Service {
   }
   postUser(data) {
     return this.post("/users", data);
-    console.log(data);
   }
 }
 

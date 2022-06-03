@@ -4615,7 +4615,7 @@ var Service = /*#__PURE__*/function () {
 
 var _default = Service;
 exports.default = _default;
-},{"axios":"node_modules/axios/index.js"}],"services/ImageService.js":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js"}],"services/UserService.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4653,43 +4653,48 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var ImageService = /*#__PURE__*/function (_Service) {
-  _inherits(ImageService, _Service);
+var UserService = /*#__PURE__*/function (_Service) {
+  _inherits(UserService, _Service);
 
-  var _super = _createSuper(ImageService);
+  var _super = _createSuper(UserService);
 
-  function ImageService() {
-    _classCallCheck(this, ImageService);
+  function UserService() {
+    _classCallCheck(this, UserService);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(ImageService, [{
+  _createClass(UserService, [{
     key: "handleError",
     value: function handleError(error) {
-      return _get(_getPrototypeOf(ImageService.prototype), "handleError", this).call(this, error);
+      console.log();
+      console.log("자식", error);
+      return _get(_getPrototypeOf(UserService.prototype), "handleError", this).call(this, error);
     }
   }, {
-    key: "getSearchImages",
-    value: function getSearchImages(query) {
-      // TODO1: axios get query 사용
-      // TODO2: client_id query 공통화
-      return this.get("/search/photos?query=".concat(query, "&client_id=jfsU0QW5qsWWCrWXbMWFdEmRxlFBzkYxCtrDkhThcfU"));
+    key: "getUsers",
+    value: function getUsers() {
+      return this.get("/users");
+    }
+  }, {
+    key: "postUser",
+    value: function postUser(data) {
+      return this.post("/users", data);
     }
   }]);
 
-  return ImageService;
+  return UserService;
 }(_Service2.default);
 
-var _default = new ImageService({
-  baseURL: "https://api.unsplash.com"
+var _default = new UserService({
+  baseURL: "http://localhost:3030"
 });
 
 exports.default = _default;
-},{"./Service.js":"services/Service.js"}],"pages/main.js":[function(require,module,exports) {
+},{"./Service.js":"services/Service.js"}],"pages/login.js":[function(require,module,exports) {
 "use strict";
 
-var _ImageService = _interopRequireDefault(require("../services/ImageService.js"));
+var _UserService = _interopRequireDefault(require("../services/UserService"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4701,91 +4706,45 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var imageList = document.querySelector(".fetchImagesWrapper");
-
-function fetchImages() {
-  return _fetchImages.apply(this, arguments);
-}
-
-function _fetchImages() {
-  _fetchImages = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var _yield$ImageService$g, results;
-
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
-            return _ImageService.default.getSearchImages("london");
-
-          case 3:
-            _yield$ImageService$g = _context2.sent;
-            results = _yield$ImageService$g.results;
-            renderImages(results);
-            _context2.next = 11;
-            break;
-
-          case 8:
-            _context2.prev = 8;
-            _context2.t0 = _context2["catch"](0);
-            console.log(_context2.t0);
-
-          case 11:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, null, [[0, 8]]);
-  }));
-  return _fetchImages.apply(this, arguments);
-}
-
-function renderImages(images) {
-  var output = images.map(function (image) {
-    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" />\n          <div class=\"h_container\">\n            <i id=\"heart-btn\" class=\"far fa-heart\" data-icon=\"heart-icon\"></i>\n          </div>\n      </div>\n    ");
-  }).join("");
-  return imageList.innerHTML = output;
-}
-
-fetchImages();
-
-function heartIcon() {
-  var heartBtn = document.querySelector(".fa-heart");
-  console.log(heartBtn);
-
-  if (heartBtn.classList.contains("far")) {
-    heartBtn.classList.remove("far");
-    heartBtn.classList.add("fas");
-  } else {
-    heartBtn.classList.remove("fas");
-    heartBtn.classList.add("far");
-  }
-}
-
-imageList.addEventListener("click", /*#__PURE__*/function () {
+var submitBtn = document.querySelector("#submit");
+submitBtn.addEventListener("click", /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            heartIcon();
             e.preventDefault();
-            console.log("you clicked hearticon");
+            _context.prev = 1;
+            _context.next = 4;
+            return _UserService.default.postUser({
+              email: email.value,
+              password: password.value
+            }).then(function () {
+              location.replace("/images");
+            });
 
-          case 3:
+          case 4:
+            _context.next = 9;
+            break;
+
+          case 6:
+            _context.prev = 6;
+            _context.t0 = _context["catch"](1);
+            console.log(_context.t0);
+
+          case 9:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[1, 6]]);
   }));
 
   return function (_x) {
     return _ref.apply(this, arguments);
   };
 }());
-},{"../services/ImageService.js":"services/ImageService.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"../services/UserService":"services/UserService.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -4989,5 +4948,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","pages/main.js"], null)
-//# sourceMappingURL=/main.6622d174.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","pages/login.js"], null)
+//# sourceMappingURL=/login.12bc12a1.js.map

@@ -4680,7 +4680,6 @@ var UserService = /*#__PURE__*/function (_Service) {
     key: "postUser",
     value: function postUser(data) {
       return this.post("/users", data);
-      console.log(data);
     }
   }]);
 
@@ -4835,7 +4834,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51216" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53437" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
