@@ -4707,104 +4707,81 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //add event listeners to the button
+// 회원가입 구현 필요
+// 1. 패스워드 별 표시
+// 2. 이메일 validation
+// 3. 회원가입 성공시 페이지를 이동시키거나, alert 메세지 띄워주기 + input값 비우기
+// 4. (로그인 동일) 마지막 인풋에서 엔터 치면 버튼 클릭한 기능과 동일하게
 var submitBtn = document.querySelector("#submit");
-submitBtn.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-  var email, password, confirmation, getEmail;
-  return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+submitBtn.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var email, password, confirmation, getEmail, hasEmail;
+  return _regeneratorRuntime().wrap(function _callee$(_context) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context.prev = _context.next) {
         case 0:
-          //bring the data from the forms
           email = document.getElementById("email").value;
           password = document.getElementById("password").value;
           confirmation = document.getElementById("confirm").value;
-          console.log(email);
-          console.log(password);
-          console.log(confirmation); // TODO: 이미 가입된 회원인지 확인이 필요
-          //get the email from json
-
-          _context2.next = 8;
+          _context.next = 5;
           return _UserService.default.getUsers();
 
-        case 8:
-          getEmail = _context2.sent;
-          console.log(getEmail);
-          getEmail.map( /*#__PURE__*/function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(user) {
-              return _regeneratorRuntime().wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      if (!(user.email === email)) {
-                        _context.next = 4;
-                        break;
-                      }
+        case 5:
+          getEmail = _context.sent;
+          hasEmail = getEmail.some(function (item) {
+            return item.email === email;
+          });
 
-                      _context.t0 = alert("your email address already exists");
-                      _context.next = 7;
-                      break;
-
-                    case 4:
-                      _context.next = 6;
-                      return _UserService.default.postUser({
-                        email: email
-                      });
-
-                    case 6:
-                      _context.t0 = _context.sent;
-
-                    case 7:
-                      return _context.abrupt("return", _context.t0);
-
-                    case 8:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee);
-            }));
-
-            return function (_x) {
-              return _ref2.apply(this, arguments);
-            };
-          }()); //check whether the password is the same
-          //if it's not the same alert msg
-
-          if (!(password !== confirmation)) {
-            _context2.next = 13;
+          if (!hasEmail) {
+            _context.next = 11;
             break;
           }
 
-          return _context2.abrupt("return", alert("the password doest not match"));
+          alert("your email address already exists");
+          _context.next = 13;
+          break;
+
+        case 11:
+          _context.next = 13;
+          return _UserService.default.postUser({
+            email: email
+          });
 
         case 13:
-          if (!(password === confirmation)) {
-            _context2.next = 22;
+          if (!(password !== confirmation)) {
+            _context.next = 15;
             break;
           }
 
-          _context2.prev = 14;
-          _context2.next = 17;
+          return _context.abrupt("return", alert("the password doest not match"));
+
+        case 15:
+          if (!(password === confirmation)) {
+            _context.next = 24;
+            break;
+          }
+
+          _context.prev = 16;
+          _context.next = 19;
           return _UserService.default.postUser({
             email: email,
             password: password
           });
 
-        case 17:
-          _context2.next = 22;
+        case 19:
+          _context.next = 24;
           break;
 
-        case 19:
-          _context2.prev = 19;
-          _context2.t0 = _context2["catch"](14);
-          console.log(_context2.t0);
+        case 21:
+          _context.prev = 21;
+          _context.t0 = _context["catch"](16);
+          console.log(_context.t0);
 
-        case 22:
+        case 24:
         case "end":
-          return _context2.stop();
+          return _context.stop();
       }
     }
-  }, _callee2, null, [[14, 19]]);
+  }, _callee, null, [[16, 21]]);
 })));
 },{"../services/UserService.js":"services/UserService.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -4834,7 +4811,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53437" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61827" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -7,19 +7,19 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  width: 80%;
-  height: 80%;
+  width: 60%;
+  height: 60%;
 }
 
 .fa-heart {
   position: absolute;
   z-index: 2;
-  color: grey;
+  color: red;
   text-align: right;
   font-size: 25px;
   cursor: pointer;
   border: transparent;
-  left: 120px;
+  left: 300px;
   top: 20px;
   bottom: 10px;
 }

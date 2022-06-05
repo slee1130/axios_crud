@@ -4719,25 +4719,28 @@ submitBtn.addEventListener("click", /*#__PURE__*/function () {
             return _UserService.default.postUser({
               email: email.value,
               password: password.value
-            }).then(function () {
-              location.replace("/images");
             });
 
           case 4:
-            _context.next = 9;
+            // 1. 성공 메세지를 띄워주세요
+            alert("you logged in"); // 2. 쿠키에 현재 로그인한 이메일을 저장하세요
+
+            document.cookie = "email=".concat(email.value);
+            location.replace("/images");
+            _context.next = 12;
             break;
 
-          case 6:
-            _context.prev = 6;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](1);
             console.log(_context.t0);
 
-          case 9:
+          case 12:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 6]]);
+    }, _callee, null, [[1, 9]]);
   }));
 
   return function (_x) {
@@ -4772,7 +4775,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53437" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61827" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

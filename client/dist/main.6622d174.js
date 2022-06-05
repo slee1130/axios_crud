@@ -4687,6 +4687,7 @@ var _default = new ImageService({
 
 exports.default = _default;
 },{"./Service.js":"services/Service.js"}],"pages/main.js":[function(require,module,exports) {
+var define;
 "use strict";
 
 var _ImageService = _interopRequireDefault(require("../services/ImageService.js"));
@@ -4701,6 +4702,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+// import UserService from "../services/UserService.js";
+//global
 var imageList = document.querySelector(".fetchImagesWrapper");
 
 function fetchImages() {
@@ -4717,7 +4720,7 @@ function _fetchImages() {
           case 0:
             _context2.prev = 0;
             _context2.next = 3;
-            return _ImageService.default.getSearchImages("london");
+            return _ImageService.default.getSearchImages("korea");
 
           case 3:
             _yield$ImageService$g = _context2.sent;
@@ -4743,37 +4746,34 @@ function _fetchImages() {
 
 function renderImages(images) {
   var output = images.map(function (image) {
-    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" />\n          <div class=\"h_container\">\n            <i id=\"heart-btn\" class=\"far fa-heart\" data-icon=\"heart-icon\"></i>\n          </div>\n      </div>\n    ");
+    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" />\n          <div class=\"h_container\">\n            <i id=\"heart-btn\" data-img=\"").concat(image.id, "\" class=\"heart far fa-heart\" data-icon=\"heart-icon\"></i>\n          </div>\n      </div>\n    ");
   }).join("");
   return imageList.innerHTML = output;
 }
 
 fetchImages();
-
-function heartIcon() {
-  var heartBtn = document.querySelector(".fa-heart");
-  console.log(heartBtn);
-
-  if (heartBtn.classList.contains("far")) {
-    heartBtn.classList.remove("far");
-    heartBtn.classList.add("fas");
-  } else {
-    heartBtn.classList.remove("fas");
-    heartBtn.classList.add("far");
-  }
-}
-
 imageList.addEventListener("click", /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+    var heartBtn;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            heartIcon();
+            console.log("you clicked heart button", e.target);
             e.preventDefault();
-            console.log("you clicked hearticon");
+            heartBtn = e.target;
 
-          case 3:
+            if (heartBtn.classList.contains("heart")) {
+              if (heartBtn.classList.contains("far")) {
+                heartBtn.classList.remove("far");
+                heartBtn.classList.add("fas");
+              } else {
+                heartBtn.classList.remove("fas");
+                heartBtn.classList.add("far");
+              }
+            }
+
+          case 4:
           case "end":
             return _context.stop();
         }
@@ -4784,7 +4784,18 @@ imageList.addEventListener("click", /*#__PURE__*/function () {
   return function (_x) {
     return _ref.apply(this, arguments);
   };
-}());
+}()); //infinite scroll
+// A) window.scrollY: How far the document has been scrolled from the top
+// B) window.innerHeight: The visible part of the window
+// C) document.body.offsetHeight: The height of the entire document
+// window.addEventListener("scroll", async () => {
+//   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+//     await fetchImages();
+//   }
+//   console.log(window.innerHeight);
+//   console.log(window.scrollY);
+//   console.log(document.body.offsetHeight);
+// });
 },{"../services/ImageService.js":"services/ImageService.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4813,7 +4824,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53437" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61827" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

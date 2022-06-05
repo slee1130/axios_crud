@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,11 +11,16 @@
 
 <body>
   <div>
-    <nav>
-      <a href="/images">Collect Images</a> |
-      <a href="/html/login.html">Login</a> |
-      <a href="/html/signup.html">Sign Up</a>
-
+    <nav id="nav">
+      <a href="/images">Collect Images</a>
+      |
+      <span id="nav-default">
+        <a href="/login.html">Login</a>|
+        <a href="/signup.html"> Sign Up</a>
+      </span>
+      <span id="nav-logout">
+        <h5></h5><a id="logout" href="#"> Logout</a>
+      </span>
     </nav>
   </div>
   <div class="fetchImagesWrapper">
@@ -25,6 +29,7 @@
     </div>
   </div>
   <script src="/main.6622d174.js"></script>
+  <script src="/nav.2245a2a2.js"></script>
   <script src="https://kit.fontawesome.com/3929e16ef5.js" crossorigin="anonymous"></script>
 </body>
 
