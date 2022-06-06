@@ -4706,83 +4706,122 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//add event listeners to the button
 // 회원가입 구현 필요
 // 1. 패스워드 별 표시
 // 2. 이메일 validation
 // 3. 회원가입 성공시 페이지를 이동시키거나, alert 메세지 띄워주기 + input값 비우기
 // 4. (로그인 동일) 마지막 인풋에서 엔터 치면 버튼 클릭한 기능과 동일하게
-var submitBtn = document.querySelector("#submit");
-submitBtn.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-  var email, password, confirmation, getEmail, hasEmail;
-  return _regeneratorRuntime().wrap(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          email = document.getElementById("email").value;
-          password = document.getElementById("password").value;
-          confirmation = document.getElementById("confirm").value;
-          _context.next = 5;
-          return _UserService.default.getUsers();
+var submitBtn = document.querySelector("#signup-form");
+submitBtn.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    emailValidation();
+    passwordValidation();
+  }
+});
 
-        case 5:
-          getEmail = _context.sent;
-          hasEmail = getEmail.some(function (item) {
-            return item.email === email;
-          });
+function emailValidation() {
+  return _emailValidation.apply(this, arguments);
+}
 
-          if (!hasEmail) {
-            _context.next = 11;
+function _emailValidation() {
+  _emailValidation = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var email, getEmail, hasEmail, regExp, isValidEmail;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            email = document.getElementById("email").value;
+            _context.next = 3;
+            return _UserService.default.getUsers();
+
+          case 3:
+            getEmail = _context.sent;
+            hasEmail = getEmail.some(function (item) {
+              return item.email === email;
+            });
+            regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+            isValidEmail = regExp.test(email);
+
+            if (!(hasEmail && !isValidEmail)) {
+              _context.next = 11;
+              break;
+            }
+
+            alert("sorry you cannot create your id..");
+            _context.next = 14;
             break;
-          }
 
-          alert("your email address already exists");
-          _context.next = 13;
-          break;
+          case 11:
+            _context.next = 13;
+            return _UserService.default.postUser({
+              email: email
+            });
 
-        case 11:
-          _context.next = 13;
-          return _UserService.default.postUser({
-            email: email
-          });
+          case 13:
+            return _context.abrupt("return", _context.sent);
 
-        case 13:
-          if (!(password !== confirmation)) {
-            _context.next = 15;
-            break;
-          }
-
-          return _context.abrupt("return", alert("the password doest not match"));
-
-        case 15:
-          if (!(password === confirmation)) {
-            _context.next = 24;
-            break;
-          }
-
-          _context.prev = 16;
-          _context.next = 19;
-          return _UserService.default.postUser({
-            email: email,
-            password: password
-          });
-
-        case 19:
-          _context.next = 24;
-          break;
-
-        case 21:
-          _context.prev = 21;
-          _context.t0 = _context["catch"](16);
-          console.log(_context.t0);
-
-        case 24:
-        case "end":
-          return _context.stop();
+          case 14:
+          case "end":
+            return _context.stop();
+        }
       }
-    }
-  }, _callee, null, [[16, 21]]);
-})));
+    }, _callee);
+  }));
+  return _emailValidation.apply(this, arguments);
+}
+
+function passwordValidation() {
+  return _passwordValidation.apply(this, arguments);
+}
+
+function _passwordValidation() {
+  _passwordValidation = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var password, confirmation;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            password = document.getElementById("password").value;
+            confirmation = document.getElementById("confirm").value;
+
+            if (!(password !== confirmation)) {
+              _context2.next = 4;
+              break;
+            }
+
+            return _context2.abrupt("return", alert("the password doest not match"));
+
+          case 4:
+            if (!(password === confirmation)) {
+              _context2.next = 13;
+              break;
+            }
+
+            _context2.prev = 5;
+            _context2.next = 8;
+            return _UserService.default.postUser({
+              email: email,
+              password: password
+            });
+
+          case 8:
+            _context2.next = 13;
+            break;
+
+          case 10:
+            _context2.prev = 10;
+            _context2.t0 = _context2["catch"](5);
+            console.log(_context2.t0);
+
+          case 13:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[5, 10]]);
+  }));
+  return _passwordValidation.apply(this, arguments);
+}
 },{"../services/UserService.js":"services/UserService.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4811,7 +4850,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61827" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64650" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
