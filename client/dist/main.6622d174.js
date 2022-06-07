@@ -4726,20 +4726,21 @@ function _fetchImages() {
             _yield$ImageService$g = _context2.sent;
             results = _yield$ImageService$g.results;
             renderImages(results);
-            _context2.next = 11;
+            console.log(results);
+            _context2.next = 12;
             break;
 
-          case 8:
-            _context2.prev = 8;
+          case 9:
+            _context2.prev = 9;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0);
 
-          case 11:
+          case 12:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 8]]);
+    }, _callee2, null, [[0, 9]]);
   }));
   return _fetchImages.apply(this, arguments);
 }
@@ -4763,14 +4764,12 @@ imageList.addEventListener("click", /*#__PURE__*/function () {
             e.preventDefault();
             heartBtn = e.target;
 
-            if (heartBtn.classList.contains("heart")) {
-              if (heartBtn.classList.contains("far")) {
-                heartBtn.classList.remove("far");
-                heartBtn.classList.add("fas");
-              } else {
-                heartBtn.classList.remove("fas");
-                heartBtn.classList.add("far");
-              }
+            if (heartBtn.classList.contains("far")) {
+              heartBtn.classList.remove("far");
+              heartBtn.classList.add("fas");
+            } else {
+              heartBtn.classList.remove("fas");
+              heartBtn.classList.add("far");
             }
 
           case 4:
@@ -4784,18 +4783,7 @@ imageList.addEventListener("click", /*#__PURE__*/function () {
   return function (_x) {
     return _ref.apply(this, arguments);
   };
-}()); //infinite scroll
-// A) window.scrollY: How far the document has been scrolled from the top
-// B) window.innerHeight: The visible part of the window
-// C) document.body.offsetHeight: The height of the entire document
-// window.addEventListener("scroll", async () => {
-//   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-//     await fetchImages();
-//   }
-//   console.log(window.innerHeight);
-//   console.log(window.scrollY);
-//   console.log(document.body.offsetHeight);
-// });
+}());
 },{"../services/ImageService.js":"services/ImageService.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4824,7 +4812,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59503" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59780" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

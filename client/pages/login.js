@@ -14,7 +14,7 @@ submitBtn.addEventListener("click", async (e) => {
     // 2. 쿠키에 현재 로그인한 이메일을 저장하세요
     document.cookie = `email=${email.value}`;
 
-    location.replace("/images");
+    location.replace("/");
   } catch (err) {
     console.log(err);
   }

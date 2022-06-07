@@ -117,79 +117,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"utils/cookie.js":[function(require,module,exports) {
-"use strict";
+})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.readCookie = exports.eraseCookie = exports.createCookie = void 0;
-
-// usage
-// CookiesHelper.createCookie("myCookieUniqueName", value, 30);
-// CookiesHelper.createCookie("myJsonCookieUniqueName", json, 30);
-var createCookie = function createCookie(name, value, days) {
-  if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    var expires = "; expires=" + date.toGMTString();
-  } else var expires = "";
-
-  document.cookie = name + "=" + value + expires + "; path=/";
-}; // usage
-// var value = CookiesHelper.readCookie("myCookieUniqueName");
-// var json = JSON.parse(CookiesHelper.readCookie("myJsonCookieUniqueName");
-
-
-exports.createCookie = createCookie;
-
-var readCookie = function readCookie(name) {
-  var nameEQ = name + "=";
-  var ca = document.cookie.split(";");
-
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-
-    while (c.charAt(0) == " ") {
-      c = c.substring(1, c.length);
-    }
-
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  return null;
-};
-
-exports.readCookie = readCookie;
-
-var eraseCookie = function eraseCookie(name) {
-  createCookie(name, "", -1);
-};
-
-exports.eraseCookie = eraseCookie;
-},{}],"pages/nav.js":[function(require,module,exports) {
-"use strict";
-
-var _cookie = require("../utils/cookie.js");
-
-var navEl = document.querySelector("#nav");
-var linkEl = document.querySelector("#nav-default");
-var linkLogOutEl = document.querySelector("#nav-logout");
-var userEmailEl = document.querySelector("#nav-logout > div");
-var emailCookie = (0, _cookie.readCookie)("email");
-linkEl.style.display = emailCookie ? "none" : "inline-block";
-linkLogOutEl.style.display = emailCookie ? "inline-block" : "none";
-userEmailEl.innerHTML = emailCookie;
-var logoutEl = document.querySelector("#logout");
-logoutEl.addEventListener("click", function () {
-  (0, _cookie.eraseCookie)("email");
-  renderNav();
-}); //if else statement로 로그인/ 로그아웃 아이디 구현하기
-
-function renderNav() {
-  navEl.innerHTML = "\n    <a href=\"/images\">Collect Images</a>\n    |\n    <span id=\"nav-default\">\n      <a href=\"/login.html\">Login</a>|\n      <a href=\"/signup.html\"> Sign Up</a>\n    </span>\n    <span id=\"nav-logout\">\n      <div class=\"show__email\"></div><a id=\"logout\" href=\"#\"> Logout</a>\n    </span>\n  ";
+  return bundleURL;
 }
-},{"../utils/cookie.js":"utils/cookie.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -393,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","pages/nav.js"], null)
-//# sourceMappingURL=/nav.2245a2a2.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/images.js.map
