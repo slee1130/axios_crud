@@ -2,7 +2,7 @@ import { readCookie, eraseCookie } from "../utils/cookie.js";
 const navEl = document.querySelector("#nav");
 const linkEl = document.querySelector("#nav-default");
 const linkLogOutEl = document.querySelector("#nav-logout");
-const userEmailEl = document.querySelector("#nav-logout > h5");
+const userEmailEl = document.querySelector("#nav-logout > div");
 
 const emailCookie = readCookie("email");
 linkEl.style.display = emailCookie ? "none" : "inline-block";
@@ -27,9 +27,7 @@ function renderNav() {
       <a href="/signup.html"> Sign Up</a>
     </span>
     <span id="nav-logout">
-      <h5></h5><a id="logout" href="#"> Logout</a>
+      <div class="show__email"></div><a id="logout" href="#"> Logout</a>
     </span>
   `;
 }
-
-renderNav();

@@ -24,5 +24,11 @@
   bottom: 10px;
 }
 
+.show__email{
+  font-size: 15px;
+  color: purple;
+  display: inherit;
+}
+
 
 /*# sourceMappingURL=/main.c52e0fe2.css.map */

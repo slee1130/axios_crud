@@ -23,3 +23,9 @@
   top: 20px;
   bottom: 10px;
 }
+
+.show__email{
+  font-size: 15px;
+  color: purple;
+  display: inherit;
+}
