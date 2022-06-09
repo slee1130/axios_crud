@@ -1,8 +1,7 @@
 import ImageService from "../services/ImageService.js";
-// import UserService from "../services/UserService.js";
 
 //global
-const imageList = document.querySelector(".fetchImagesWrapper");
+export const imageList = document.querySelector(".fetchImagesWrapper");
 
 async function fetchImages() {
   try {

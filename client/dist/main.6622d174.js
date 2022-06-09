@@ -4690,6 +4690,11 @@ exports.default = _default;
 var define;
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.imageList = void 0;
+
 var _ImageService = _interopRequireDefault(require("../services/ImageService.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -4702,9 +4707,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// import UserService from "../services/UserService.js";
 //global
 var imageList = document.querySelector(".fetchImagesWrapper");
+exports.imageList = imageList;
 
 function fetchImages() {
   return _fetchImages.apply(this, arguments);
@@ -4812,7 +4817,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59780" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54519" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
