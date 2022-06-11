@@ -4686,16 +4686,105 @@ var _default = new ImageService({
 });
 
 exports.default = _default;
-},{"./Service.js":"services/Service.js"}],"pages/main.js":[function(require,module,exports) {
+},{"./Service.js":"services/Service.js"}],"services/UserService.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Service2 = _interopRequireDefault(require("./Service.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var UserService = /*#__PURE__*/function (_Service) {
+  _inherits(UserService, _Service);
+
+  var _super = _createSuper(UserService);
+
+  function UserService() {
+    _classCallCheck(this, UserService);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(UserService, [{
+    key: "handleError",
+    value: function handleError(error) {
+      console.log();
+      console.log("자식", error);
+      return _get(_getPrototypeOf(UserService.prototype), "handleError", this).call(this, error);
+    }
+  }, {
+    key: "getUsers",
+    value: function getUsers() {
+      return this.get("/users");
+    }
+  }, {
+    key: "postUser",
+    value: function postUser(data) {
+      return this.post("/users", data);
+    }
+  }]);
+
+  return UserService;
+}(_Service2.default);
+
+var _default = new UserService({
+  baseURL: "http://localhost:3030"
+});
+
+exports.default = _default;
+},{"./Service.js":"services/Service.js"}],"pages/images.js":[function(require,module,exports) {
+var imageContainer = document.getElementById("image-card");
+
+function addImage(images) {
+  var output = images.map(function (image) {
+    return "\n      <h5 class=\"card-title\">Images that you liked \u2764\uFE0F</h5>\n      <div class=\"image\" id=\"image-card\">\n        <img class=\"card-img-top\" src=\"".concat(image.src, "\"  alt=\"Card image cap\">\n        <div class=\"card-body\">\n        <p class=\"card-text\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna\n        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n        </div>\n        </div>\n      </div>\n    ");
+  }).join("");
+  return imageContainer.innerHTML = output;
+}
+},{}],"pages/main.js":[function(require,module,exports) {
 var define;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.imageList = void 0;
+exports.default = void 0;
 
 var _ImageService = _interopRequireDefault(require("../services/ImageService.js"));
+
+var _UserService = _interopRequireDefault(require("../services/UserService.js"));
+
+var _images = _interopRequireDefault(require("./images.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4708,51 +4797,52 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //global
-var imageList = document.querySelector(".fetchImagesWrapper");
-exports.imageList = imageList;
+var _default = imageList = document.querySelector(".fetchImagesWrapper");
+
+exports.default = _default;
 
 function fetchImages() {
   return _fetchImages.apply(this, arguments);
 }
 
 function _fetchImages() {
-  _fetchImages = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  _fetchImages = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
     var _yield$ImageService$g, results;
 
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
+            _context3.prev = 0;
+            _context3.next = 3;
             return _ImageService.default.getSearchImages("korea");
 
           case 3:
-            _yield$ImageService$g = _context2.sent;
+            _yield$ImageService$g = _context3.sent;
             results = _yield$ImageService$g.results;
             renderImages(results);
             console.log(results);
-            _context2.next = 12;
+            _context3.next = 12;
             break;
 
           case 9:
-            _context2.prev = 9;
-            _context2.t0 = _context2["catch"](0);
-            console.log(_context2.t0);
+            _context3.prev = 9;
+            _context3.t0 = _context3["catch"](0);
+            console.log(_context3.t0);
 
           case 12:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2, null, [[0, 9]]);
+    }, _callee3, null, [[0, 9]]);
   }));
   return _fetchImages.apply(this, arguments);
 }
 
 function renderImages(images) {
   var output = images.map(function (image) {
-    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" />\n          <div class=\"h_container\">\n            <i id=\"heart-btn\" data-img=\"").concat(image.id, "\" class=\"heart far fa-heart\" data-icon=\"heart-icon\"></i>\n          </div>\n      </div>\n    ");
+    return "\n      <div class=\"fetchImagesWrapper\">\n        <img src=".concat(image.urls.regular, " class=\"image\" id=\"image\" />\n          <div class=\"h_container\">\n            <i id=\"heart-btn\" data-img=\"").concat(image.id, "\" class=\"heart far fa-heart\" data-icon=\"heart-icon\"></i>\n          </div>\n      </div>\n    ");
   }).join("");
   return imageList.innerHTML = output;
 }
@@ -4789,7 +4879,66 @@ imageList.addEventListener("click", /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }());
-},{"../services/ImageService.js":"services/ImageService.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+imageList.addEventListener("click", /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
+    var heartBtn, image, i;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            e.preventDefault();
+            heartBtn = e.target;
+            image = document.getElementById("image").src; // console.log("IS THIS WORKING?", image);
+            // debugger;
+
+            i = 0;
+
+          case 4:
+            if (!(i < heartBtn.length)) {
+              _context2.next = 19;
+              break;
+            }
+
+            if (!(heartBtn[i].className === "fas")) {
+              _context2.next = 16;
+              break;
+            }
+
+            console.log(heartBtn[i].className);
+            _context2.prev = 7;
+            _context2.next = 10;
+            return _UserService.default.postUser({
+              image: image
+            });
+
+          case 10:
+            (0, _images.default)(image);
+            _context2.next = 16;
+            break;
+
+          case 13:
+            _context2.prev = 13;
+            _context2.t0 = _context2["catch"](7);
+            console.log(_context2.t0);
+
+          case 16:
+            i++;
+            _context2.next = 4;
+            break;
+
+          case 19:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[7, 13]]);
+  }));
+
+  return function (_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}());
+},{"../services/ImageService.js":"services/ImageService.js","../services/UserService.js":"services/UserService.js","./images.js":"pages/images.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -4817,7 +4966,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54519" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58220" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
