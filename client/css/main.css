@@ -29,3 +29,11 @@
   color: purple;
   display: inherit;
 }
+
+.liked_image{
+  margin-top: 20px;
+}
+
+.card-title {
+  font-size: 25px;
+}

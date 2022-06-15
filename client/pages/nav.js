@@ -1,4 +1,5 @@
 import { readCookie, eraseCookie } from "../utils/cookie.js";
+
 const navEl = document.querySelector("#nav");
 const userEmailEl = document.querySelector("#nav-logout > div");
 const logoutEl = document.querySelector("#logout");

@@ -4667,14 +4667,12 @@ var LikeService = /*#__PURE__*/function (_Service) {
   _createClass(LikeService, [{
     key: "handleError",
     value: function handleError(error) {
-      console.log();
-      console.log("자식", error);
       return _get(_getPrototypeOf(LikeService.prototype), "handleError", this).call(this, error);
     }
   }, {
-    key: "getImage",
-    value: function getImage(id) {
-      return this.get("/".concat(id));
+    key: "getLikes",
+    value: function getLikes() {
+      return this.get("/likes");
     }
   }, {
     key: "likeImage",
@@ -4812,16 +4810,6 @@ var eraseCookie = function eraseCookie(name) {
 };
 
 exports.eraseCookie = eraseCookie;
-},{}],"pages/images.js":[function(require,module,exports) {
-var imageContainer = document.getElementById("image-card");
-console.log("이 페이지는 열리나????????");
-
-function addImage(images) {
-  var output = images.map(function (image) {
-    return "\n      <h5 class=\"card-title\">Images that you liked \u2764\uFE0F</h5>\n      <div class=\"image\" id=\"image-card\">\n        <img class=\"card-img-top\" src=".concat(image.src, "  alt=\"Card image cap\">\n        <div class=\"card-body\">\n        <p class=\"card-text\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna\n        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n        </div>\n        </div>\n      </div>\n    ");
-  }).join("");
-  return imageContainer.innerHTML = output;
-}
 },{}],"pages/main.js":[function(require,module,exports) {
 var define;
 "use strict";
@@ -4831,8 +4819,6 @@ var _LikeService = _interopRequireDefault(require("../services/LikeService.js"))
 var _ImageService = _interopRequireDefault(require("../services/ImageService.js"));
 
 var _cookie = require("../utils/cookie.js");
-
-var _images = _interopRequireDefault(require("./images.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4954,45 +4940,42 @@ imageList.addEventListener("click", /*#__PURE__*/function () {
               var id = _ref3.id;
               return id === e.target.dataset.img;
             }), _fetchedImages$filter2 = _slicedToArray(_fetchedImages$filter, 1), selectedImg = _fetchedImages$filter2[0];
-            console.log("IS THIS WORKING?", selectedImg);
 
             if (!heartBtn.classList.contains("fas")) {
-              _context2.next = 16;
+              _context2.next = 14;
               break;
             }
 
-            _context2.prev = 6;
-            _context2.next = 9;
+            _context2.prev = 5;
+            _context2.next = 8;
             return _LikeService.default.likeImage({
               userID: userEmail,
               image: selectedImg
             });
 
-          case 9:
-            console.log(emailCookie); // inputImage;
-
+          case 8:
             alert("you saved this photo. please go check collect images");
-            _context2.next = 16;
+            _context2.next = 14;
             break;
 
-          case 13:
-            _context2.prev = 13;
-            _context2.t0 = _context2["catch"](6);
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](5);
             console.log(_context2.t0);
 
-          case 16:
+          case 14:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[6, 13]]);
+    }, _callee2, null, [[5, 11]]);
   }));
 
   return function (_x2) {
     return _ref2.apply(this, arguments);
   };
 }());
-},{"../services/LikeService.js":"services/LikeService.js","../services/ImageService.js":"services/ImageService.js","../utils/cookie.js":"utils/cookie.js","./images.js":"pages/images.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"../services/LikeService.js":"services/LikeService.js","../services/ImageService.js":"services/ImageService.js","../utils/cookie.js":"utils/cookie.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -5020,7 +5003,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63137" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59996" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

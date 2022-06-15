@@ -2,8 +2,6 @@ import LikeService from "../services/LikeService.js";
 import ImageService from "../services/ImageService.js";
 import { readCookie } from "../utils/cookie.js";
 
-import addImage from "./images.js";
-
 //global
 imageList = document.querySelector(".fetchImagesWrapper");
 let fetchedImages = [];
@@ -57,13 +55,9 @@ imageList.addEventListener("click", async (e) => {
   const [selectedImg] = fetchedImages.filter(
     ({ id }) => id === e.target.dataset.img
   );
-  console.log("IS THIS WORKING?", selectedImg);
   if (heartBtn.classList.contains("fas")) {
-    // debugger;
     try {
       await LikeService.likeImage({ userID: userEmail, image: selectedImg });
-      console.log(emailCookie);
-      // inputImage;
       alert("you saved this photo. please go check collect images");
     } catch (err) {
       console.log(err);

@@ -4706,17 +4706,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// 회원가입 구현 필요
-// 1. 패스워드 별 표시
-// 2. 이메일 validation
-// 3. 회원가입 성공시 페이지를 이동시키거나, alert 메세지 띄워주기 + input값 비우기
-// 4. (로그인 동일) 마지막 인풋에서 엔터 치면 버튼 클릭한 기능과 동일하게
 var submitBtn = document.querySelector("#signup-form");
-console.log("사인업되니");
 submitBtn.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     emailValidation();
     passwordValidation();
+    alert("you have successfully signed up");
   }
 });
 
@@ -4851,7 +4846,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63137" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59996" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

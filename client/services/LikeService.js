@@ -2,14 +2,11 @@ import Service from "./Service.js";
 
 class LikeService extends Service {
   handleError(error) {
-    console.log();
-    console.log("자식", error);
-
     return super.handleError(error);
   }
 
-  getImage(id) {
-    return this.get(`/${id}`);
+  getLikes() {
+    return this.get("/likes");
   }
 
   likeImage(data) {

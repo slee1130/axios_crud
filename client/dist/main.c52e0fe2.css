@@ -30,5 +30,12 @@
   display: inherit;
 }
 
+.liked_image{
+  margin-top: 20px;
+}
+
+.card-title {
+  font-size: 25px;
+}
 
 /*# sourceMappingURL=/main.c52e0fe2.css.map */
