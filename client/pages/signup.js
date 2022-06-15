@@ -7,7 +7,7 @@ import UserService from "../services/UserService.js";
 // 4. (로그인 동일) 마지막 인풋에서 엔터 치면 버튼 클릭한 기능과 동일하게
 
 const submitBtn = document.querySelector("#signup-form");
-
+console.log("사인업되니");
 submitBtn.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     emailValidation();

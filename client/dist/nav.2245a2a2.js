@@ -173,21 +173,18 @@ exports.eraseCookie = eraseCookie;
 var _cookie = require("../utils/cookie.js");
 
 var navEl = document.querySelector("#nav");
-var linkEl = document.querySelector("#nav-default");
-var linkLogOutEl = document.querySelector("#nav-logout");
 var userEmailEl = document.querySelector("#nav-logout > div");
-var emailCookie = (0, _cookie.readCookie)("email");
-linkEl.style.display = emailCookie ? "none" : "inline-block";
-linkLogOutEl.style.display = emailCookie ? "inline-block" : "none";
-userEmailEl.innerHTML = emailCookie;
 var logoutEl = document.querySelector("#logout");
+var emailCookie = (0, _cookie.readCookie)("email");
+userEmailEl.innerHTML = emailCookie;
+var renderUsername = emailCookie ? "<span>\n          <div></div>\n          <a href=\"#\"> Logout</a>\n        </span>" : " <span>\n          <a href=\"/login.html\">Login</a>|<a href=\"/signup.html\"> Sign Up</a>\n        </span>";
 logoutEl.addEventListener("click", function () {
   (0, _cookie.eraseCookie)("email");
   renderNav();
-}); //if else statement로 로그인/ 로그아웃 아이디 구현하기
+});
 
 function renderNav() {
-  navEl.innerHTML = "\n    <a href=\"/images\">Collect Images</a>\n    |\n    <span id=\"nav-default\">\n      <a href=\"/login.html\">Login</a>|\n      <a href=\"/signup.html\"> Sign Up</a>\n    </span>\n    <span id=\"nav-logout\">\n      <div class=\"show__email\"></div><a id=\"logout\" href=\"#\"> Logout</a>\n    </span>\n  ";
+  navEl.innerHTML = "\n    <a href=\"/images\">Collect Images</a> |\n    ".concat(renderUsername, "\n  ");
 }
 },{"../utils/cookie.js":"utils/cookie.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -217,7 +214,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58220" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63137" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

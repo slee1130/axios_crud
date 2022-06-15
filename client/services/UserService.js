@@ -16,4 +16,4 @@ class UserService extends Service {
   }
 }
 
-export default new UserService({ baseURL: "http://localhost:3030" });
+export default new UserService({ baseURL: "http://localhost:3000" });

@@ -1,14 +1,18 @@
+import LikeService from "../services/LikeService.js";
 import ImageService from "../services/ImageService.js";
-import UserService from "../services/UserService.js";
+import { readCookie } from "../utils/cookie.js";
+
 import addImage from "./images.js";
 
 //global
-export default imageList = document.querySelector(".fetchImagesWrapper");
+imageList = document.querySelector(".fetchImagesWrapper");
+let fetchedImages = [];
 
 async function fetchImages() {
   try {
     const { results } = await ImageService.getSearchImages("korea");
     renderImages(results);
+    fetchedImages = results;
     console.log(results);
   } catch (err) {
     console.log(err);
@@ -49,20 +53,20 @@ imageList.addEventListener("click", async (e) => {
 imageList.addEventListener("click", async (e) => {
   e.preventDefault();
   const heartBtn = e.target;
-  const image = document.getElementById("image").src;
-  // console.log("IS THIS WORKING?", image);
-  // debugger;
-  for (let i = 0; i < heartBtn.length; i++) {
-    if (heartBtn[i].className === "fas") {
-      console.log(heartBtn[i].className);
-      try {
-        await UserService.postUser({
-          image,
-        });
-        addImage(image);
-      } catch (err) {
-        console.log(err);
-      }
+  const userEmail = readCookie("email");
+  const [selectedImg] = fetchedImages.filter(
+    ({ id }) => id === e.target.dataset.img
+  );
+  console.log("IS THIS WORKING?", selectedImg);
+  if (heartBtn.classList.contains("fas")) {
+    // debugger;
+    try {
+      await LikeService.likeImage({ userID: userEmail, image: selectedImg });
+      console.log(emailCookie);
+      // inputImage;
+      alert("you saved this photo. please go check collect images");
+    } catch (err) {
+      console.log(err);
     }
   }
 });
