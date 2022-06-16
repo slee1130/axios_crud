@@ -4756,8 +4756,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var userEmail = (0, _cookie.readCookie)("email");
 var imageContainer = document.getElementById("image-card");
-var userEmail = (0, _cookie.readCookie)("email"); //todo - cannot save the same photo
 
 function fetchLikedImages() {
   return _fetchLikedImages.apply(this, arguments);
@@ -4779,22 +4779,21 @@ function _fetchLikedImages() {
             sameUser = likes.filter(function (like) {
               return like.userID === userEmail;
             });
-            console.log("??????????", sameUser);
             renderLikedImages(sameUser);
-            _context.next = 12;
+            _context.next = 11;
             break;
 
-          case 9:
-            _context.prev = 9;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
   return _fetchLikedImages.apply(this, arguments);
 }
@@ -4803,9 +4802,9 @@ fetchLikedImages();
 
 function renderLikedImages(likes) {
   var output = likes.map(function (like) {
-    return "\n      <h5 class=\"card-title\">Images that ".concat(like.userID, " liked \u2764\uFE0F</h5>\n      <div class=\"image\" id=\"image-card\">\n        <img src=").concat(like.image.urls.regular, " class=\"image\" id=\"image\" />\n        </div>\n      </div>\n    ");
-  }).join("");
-  console.log("대체 되는건 뭐니?????", output);
+    return "\n      <h5 class=\"card-title\">Images that ".concat(like.userID, " liked \u2764\uFE0F</h5>\n      <div class=\"image-card\" id=\"image-card\">\n        <img src=").concat(like.image.urls.regular, " class=\"image\" id=\"image\"\n        data-img=").concat(like.image.id, " />\n      </div>\n    ");
+  }).join(""); // console.log("대체 되는건 뭐니?????", output);
+
   return imageContainer.innerHTML = output;
 }
 },{"../services/LikeService.js":"services/LikeService.js","../utils/cookie.js":"utils/cookie.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -4836,7 +4835,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59996" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64855" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
