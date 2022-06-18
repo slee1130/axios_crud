@@ -1,0 +1,39 @@
+.fetchImagesWrapper {
+  position: relative;
+}
+
+.image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  width: 60%;
+  height: 60%;
+}
+
+.fa-heart {
+  position: absolute;
+  z-index: 2;
+  color: red;
+  text-align: right;
+  font-size: 25px;
+  cursor: pointer;
+  border: transparent;
+  left: 300px;
+  top: 20px;
+  bottom: 10px;
+}
+
+.show__email{
+  font-size: 15px;
+  color: purple;
+  display: inherit;
+}
+
+.liked_image{
+  margin-top: 20px;
+}
+
+.card-title {
+  font-size: 25px;
+}
