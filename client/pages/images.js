@@ -27,14 +27,12 @@ function renderLikedImages(likes) {
     `;
     })
     .join("");
-  // console.log("대체 되는건 뭐니?????", output);
   return (imageContainer.innerHTML = output);
 }
 
 async function main() {
   await fetchLikedImages();
   const imageID = document.querySelectorAll(".image");
-  console.log("==============", imageID);
 }
 
 main();

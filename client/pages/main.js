@@ -2,14 +2,30 @@ import LikeService from "../services/LikeService.js";
 import ImageService from "../services/ImageService.js";
 import { readCookie } from "../utils/cookie.js";
 
-console.log(location.pathname);
+let observer;
+let page = 1;
+const listEnd = document.querySelector("#endList");
+
 function getImageList() {
   return document.querySelector(".fetchImagesWrapper");
 }
 
-async function fetchImages() {
+async function fetchAndRender(page) {
+  const fetchedImages = (await fetchImages(page)) ?? [];
+  renderImages(fetchedImages);
+  addEvent(fetchedImages);
+}
+
+async function fetchImages(page) {
   try {
-    const { results } = await ImageService.getSearchImages("korea");
+    const { results, total_pages } = await ImageService.getSearchImages({
+      page,
+      query: "korea",
+    });
+
+    if (page >= total_pages) {
+      observer.unobserve(listEnd);
+    }
     return results;
   } catch (err) {}
 }
@@ -28,13 +44,13 @@ function renderImages(images) {
     `;
     })
     .join("");
-  return (imageList.innerHTML = output);
+
+  return imageList.insertAdjacentHTML("beforeend", output);
 }
 
 function addEvent(fetchedImages) {
   const imageList = getImageList();
   imageList.addEventListener("click", async (e) => {
-    console.log("you clicked heart button", e.target);
     e.preventDefault();
     const heartBtn = e.target;
     if (heartBtn.classList.contains("far")) {
@@ -65,16 +81,52 @@ function addEvent(fetchedImages) {
         console.log(err);
       }
     } else {
-      // TODO: delete image
+      //heart delete 구현하기
+      await ImageService.delete();
     }
   });
 }
 
-async function main() {
-  const fetchedImages = (await fetchImages()) ?? [];
-  renderImages(fetchedImages);
-  addEvent(fetchedImages);
+function main() {
+  addImageListMutationObserver();
+  fetchAndRender(page);
 }
 
 main();
-console.log(readCookie("abc"));
+
+function infiniteScroll() {
+  const option = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0,
+  };
+
+  const io = (entries) => {
+    entries.forEach(async (entry) => {
+      if (!entry.isIntersecting) return;
+
+      page = page + 1;
+      fetchAndRender(page);
+    });
+  };
+
+  observer = new IntersectionObserver(io, option);
+  observer.observe(listEnd);
+}
+
+function addImageListMutationObserver() {
+  const targetNode = getImageList();
+  const config = { childList: true };
+  let isInitIntersectionObserver = false;
+
+  const callback = function (mutationList, observer) {
+    for (const mutation of mutationList) {
+      if (mutation.type === "childList" && !isInitIntersectionObserver) {
+        infiniteScroll();
+        isInitIntersectionObserver = true;
+      }
+    }
+  };
+  const observer = new MutationObserver(callback);
+  observer.observe(targetNode, config);
+}

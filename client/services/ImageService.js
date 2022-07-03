@@ -5,11 +5,11 @@ class ImageService extends Service {
     return super.handleError(error);
   }
 
-  getSearchImages(query) {
+  getSearchImages({ page = 1, per_page = 5, query }) {
     // TODO1: axios get query 사용
     // TODO2: client_id query 공통화
     return this.get(
-      `/search/photos?query=${query}&client_id=jfsU0QW5qsWWCrWXbMWFdEmRxlFBzkYxCtrDkhThcfU`
+      `/search/photos?page=${page}&per_page=${per_page}&query=${query}&client_id=jfsU0QW5qsWWCrWXbMWFdEmRxlFBzkYxCtrDkhThcfU`
     );
   }
 }

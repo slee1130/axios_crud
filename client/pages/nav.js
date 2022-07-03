@@ -1,13 +1,13 @@
 import { readCookie, eraseCookie } from "../utils/cookie.js";
 
-const userEmailEl = document.querySelector("#nav-logout > div");
-const logoutEl = document.querySelector("#logout");
 const emailCookie = readCookie("email");
-userEmailEl.innerHTML = emailCookie;
 
-logoutEl.addEventListener("click", () => {
-  eraseCookie("email");
-});
+function userEmail() {
+  const userEmailEl = document.querySelector("#nav-logout > div");
+  userEmailEl.innerHTML = emailCookie;
+}
+
+userEmail();
 
 function renderNav() {
   if (emailCookie) {
@@ -18,3 +18,7 @@ function renderNav() {
 }
 
 renderNav();
+
+document.querySelector("#logout").addEventListener("click", () => {
+  eraseCookie("email");
+});
