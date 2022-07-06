@@ -86,7 +86,7 @@ function addEvent(fetchedImages) {
       }
     } else {
       //heart delete 구현하기
-      // await ImageService.deleteImage();a
+      // await ImageService.deleteImage();
     }
   });
 }
