@@ -6,6 +6,7 @@ submitBtn.addEventListener("keypress", (e) => {
     emailValidation();
     passwordValidation();
     alert("you have successfully signed up");
+    location.href = "/login.html";
   }
 });
 

@@ -7,7 +7,7 @@ let page = 1;
 const listEnd = document.querySelector("#endList");
 
 function getImageList() {
-  return document.querySelector(".fetchImagesWrapper");
+  return document.querySelector(".fetch_image_wrapper");
 }
 
 async function fetchAndRender(page) {
@@ -35,10 +35,10 @@ function renderImages(images) {
   const output = images
     .map((image) => {
       return `
-      <div class="fetchImagesWrapper">
+      <div class="fetch_image_wrapper">
         <img src=${image.urls.regular} class="image" id="image" />
           <div class="h_container">
-            <i id="heart-btn" data-img="${image.id}" class="heart far fa-heart" data-icon="heart-icon"></i>
+            <i id="heart-btn" data-img="${image.id}" class="heart-btn far fa-heart" data-icon="heart-icon"></i>
           </div>
       </div>
     `;
@@ -50,21 +50,25 @@ function renderImages(images) {
 
 function addEvent(fetchedImages) {
   const imageList = getImageList();
-  imageList.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const heartBtn = e.target;
-    if (heartBtn.classList.contains("far")) {
-      heartBtn.classList.remove("far");
-      heartBtn.classList.add("fas");
-    } else {
-      heartBtn.classList.remove("fas");
-      heartBtn.classList.add("far");
-    }
+  const likeButtons = document.querySelectorAll(".heart-btn");
+
+  likeButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log(button);
+      if (button.classList.contains("far")) {
+        button.classList.remove("far");
+        button.classList.add("fas");
+      } else {
+        button.classList.remove("fas");
+        button.classList.add("far");
+      }
+    });
   });
 
   imageList.addEventListener("click", async (e) => {
     e.preventDefault();
-    const heartBtn = e.target;
+    const targetBtn = e.target;
     const userEmail = readCookie("email");
     const [selectedImg] = fetchedImages.filter(
       ({ id }) => id === e.target.dataset.img
@@ -73,7 +77,7 @@ function addEvent(fetchedImages) {
       location.href = "/login.html";
     }
 
-    if (heartBtn.classList.contains("fas")) {
+    if (targetBtn.classList.contains("fas")) {
       try {
         await LikeService.likeImage({ userID: userEmail, image: selectedImg });
         alert("you saved this photo. please go check collect images");
@@ -82,7 +86,7 @@ function addEvent(fetchedImages) {
       }
     } else {
       //heart delete 구현하기
-      await ImageService.delete();
+      // await ImageService.deleteImage();a
     }
   });
 }
@@ -119,7 +123,7 @@ function addImageListMutationObserver() {
   const config = { childList: true };
   let isInitIntersectionObserver = false;
 
-  const callback = function (mutationList, observer) {
+  const callback = function (mutationList) {
     for (const mutation of mutationList) {
       if (mutation.type === "childList" && !isInitIntersectionObserver) {
         infiniteScroll();

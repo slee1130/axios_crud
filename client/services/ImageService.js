@@ -12,5 +12,11 @@ class ImageService extends Service {
       `/search/photos?page=${page}&per_page=${per_page}&query=${query}&client_id=jfsU0QW5qsWWCrWXbMWFdEmRxlFBzkYxCtrDkhThcfU`
     );
   }
+
+  deleteImage(query) {
+    return this.delete(
+      `/search/photos?query=${query}client_id=jfsU0QW5qsWWCrWXbMWFdEmRxlFBzkYxCtrDkhThcfU`
+    );
+  }
 }
 export default new ImageService({ baseURL: "https://api.unsplash.com" });

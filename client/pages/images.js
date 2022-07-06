@@ -32,7 +32,6 @@ function renderLikedImages(likes) {
 
 async function main() {
   await fetchLikedImages();
-  const imageID = document.querySelectorAll(".image");
 }
 
 main();
