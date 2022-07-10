@@ -21,7 +21,7 @@ async function emailValidation() {
   if (hasEmail && !isValidEmail) {
     alert("sorry you cannot create your id..");
   } else {
-    return await UserService.postUser({ email });
+    await UserService.postUser({ email });
   }
 }
 

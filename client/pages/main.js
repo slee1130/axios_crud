@@ -85,8 +85,8 @@ function addEvent(fetchedImages) {
         console.log(err);
       }
     } else {
-      //heart delete 구현하기
-      // await ImageService.deleteImage();
+      // heart delete 구현하기
+      await ImageService.deleteImage({ query: "korea", id });
     }
   });
 }

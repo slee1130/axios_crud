@@ -13,9 +13,9 @@ class ImageService extends Service {
     );
   }
 
-  deleteImage(query) {
+  deleteImage(query, id) {
     return this.delete(
-      `/search/photos?query=${query}client_id=jfsU0QW5qsWWCrWXbMWFdEmRxlFBzkYxCtrDkhThcfU`
+      `/search/photos?query=${query}&id=${id}client_id=jfsU0QW5qsWWCrWXbMWFdEmRxlFBzkYxCtrDkhThcfU`
     );
   }
 }
